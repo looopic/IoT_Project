@@ -1,7 +1,7 @@
 import time
 #from picamera2 import Picamera2
 from whatsapp_api_client_python import API
-from detect_copy import detect_milk_bottles_yolo
+from detect_copy import detect_custom
 
 def setup():
     greenAPI = API.GreenAPI(
@@ -13,7 +13,9 @@ def setup():
         camera.capture(file_path) """
 
 def detect_milk_bottles(file_path):
-    return detect_milk_bottles_yolo(file_path)
+    return detect_custom(source=file_path, weights='yolov7-tiny.pt', view_img=True, save_txt=True, save_img=True,
+              img_size=640, conf_thres=0.25, iou_thres=0.45, device='', classes=None, agnostic_nms=False,
+              augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
 
 def send_message(count, file_path, api):
     if count <= 1:
