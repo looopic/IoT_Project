@@ -25,7 +25,7 @@ import cv2
 import numpy as np
 
 from PIL import Image
-from tflite_runtime.interpreter import Interpreter
+from tflite_runtime.interpreter import Interpreter 
 
 CAMERA_WIDTH = 1920
 CAMERA_HEIGHT = 1080
