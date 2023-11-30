@@ -95,7 +95,9 @@ def main(labels, model, image):
   interpreter.allocate_tensors()
   _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
 
-  image = cv2.imread(image).convert('RGB').resize(
-      (input_width, input_height), Image.ANTIALIAS)
-  results = detect_objects(interpreter, image, 0.4)
+  image = cv2.imread(image)
+  image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+  image_pil = Image.fromarray(image_rgb).resize((input_width, input_height))
+
+  results = detect_objects(interpreter, image_pil, 0.4)
   return calculate(results)
